@@ -310,9 +310,9 @@ class NuLite(nn.Module):
                 ],
                 axis=-1,
             )
-            instance_pred = cell_post_processor.post_process_cell_segmentation(pred_map)
-            instance_preds.append(instance_pred[0])
-            type_preds.append(instance_pred[1])
+            instance_pred, type_pred = cell_post_processor.post_process_single_image(pred_map)
+            instance_preds.append(instance_pred)
+            type_preds.append(type_pred)
 
         return torch.Tensor(np.stack(instance_preds)), type_preds
 
